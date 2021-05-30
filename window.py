@@ -19,16 +19,12 @@ class Window:
         photo = PhotoImage(file='1.png')  # Изменение иконки в левом верхнем
         self.root.iconphoto(False, photo)  # углу окна
 
-        self.frame_1 = Frame(self.root, relief='raised')
-        self.frame_1 = LabelFrame()  # Рамка фрейма
-        self.frame_1.pack(side=TOP, fill="both", ipady=5, padx=10, pady=5)
-        self.label_1 = Label(self.frame_1, text="Настройки", font='Times 12')
-        self.label_1.pack(side=LEFT, ipadx=2)
-
-        self.label_2 = Label(self.frame_1, text="Справка", font='Times 12')
-        self.label_2.pack(side=LEFT, ipadx=2)
-        self.label_3 = Label(self.frame_1, text="Купить", font='Times 12')
-        self.label_3.pack(side=LEFT, ipadx=2)
+        # Меню
+        self.mainmenu = Menu(self.root)
+        self.root.config(menu=self.mainmenu)
+        self.mainmenu.add_command(label='Настройки')
+        self.mainmenu.add_command(label='Справка')
+        self.mainmenu.add_command(label='Купить')
 
         self.frame_2 = Frame(self.root, relief='raised')
         self.frame_2 = LabelFrame(text="Загрузить из файла")  # Рамка фрейма
