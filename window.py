@@ -47,14 +47,14 @@ class Window:
         self.frame_3_eng = Frame(self.root, relief='raised')
         self.frame_3_eng = LabelFrame(text="eng txt")  # Рамка фрейма
         self.frame_3_eng.pack(side=LEFT,  expand=1, fill=X, anchor=N)
-        self.eng_txt = Text(self.frame_3_eng, bg="white", width=50)
+        self.eng_txt = Text(self.frame_3_eng, bg="white", width=50, height=15)
         self.eng_txt.pack(fill=X)
 
         # ru txt
         self.frame_3_ru = Frame(self.root, relief='raised')
         self.frame_3_ru = LabelFrame(text="ru txt")  # Рамка фрейма
         self.frame_3_ru.pack(side=LEFT,  expand=1, fill=X, anchor=N)
-        self.ru_txt = Text(self.frame_3_ru, bg="white", width=50)
+        self.ru_txt = Text(self.frame_3_ru, bg="white", width=50, height=15)
         self.ru_txt.pack(fill=X)
 
 
