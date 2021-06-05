@@ -49,6 +49,8 @@ class Window:
         self.frame_eng.pack(side=LEFT,  expand=1, fill=X, anchor=N)
         self.eng_txt = Text(self.frame_eng, bg="white", width=50, height=15)
         self.eng_txt.pack(fill=X)
+        self.w = Entry(self.frame_eng, width=3, bd=2, font=15, justify=CENTER)
+        self.w.pack(side=LEFT, padx=5, pady=10)
 
         # ru txt
         self.frame_ru = Frame(self.root, relief='raised')
@@ -56,6 +58,9 @@ class Window:
         self.frame_ru.pack(side=LEFT,  expand=1, fill=X, anchor=N)
         self.ru_txt = Text(self.frame_ru, bg="white", width=50, height=15)
         self.ru_txt.pack(fill=X)
+
+
+
 
 
     def open_file(self):  # Открыть файл
