@@ -1,6 +1,6 @@
 import os
 from tkinter import *
-from tkinter import filedialog as fd
+from tkinter import filedialog as fd, ttk
 
 
 class Window:
@@ -57,11 +57,41 @@ class Window:
         self.ru_txt = Text(self.frame_ru, bg="white", width=50, height=15)
         self.ru_txt.pack(fill=X)
 
-        self.frame_3 = Frame(self.root, relief='raised')
-        self.frame_3 = LabelFrame(text="frame_3")
-        self.frame_3.place(x=2, y=320)
-        self.w = Entry(self.frame_3, width=3, bd=2, font=15, justify=CENTER)
-        self.w.pack(side=LEFT, padx=5, pady=10)
+        # Интервал между словами в англ тексте
+        self.eng_word_spacing_frame = Frame(self.root, relief='raised')
+        self.eng_word_spacing_frame = LabelFrame(text="Интервал\n между\n словами")
+        self.eng_word_spacing_frame.place(x=2, y=320)
+        self.eng_word_spacing = Entry(self.eng_word_spacing_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.eng_word_spacing.pack(side=LEFT, padx=2, pady=2)
+        self.eng_word_spacing_label = Label(self.eng_word_spacing_frame, text="Сек.", justify=LEFT)
+        self.eng_word_spacing_label.pack(side=LEFT, padx=2, pady=2)
+
+        # Выбор голоса англ текст
+        self.eng_voice_selection_frame = Frame(self.root, relief='raised')
+        self.eng_voice_selection_frame = LabelFrame(text="Выбор\nголоса")
+        self.eng_voice_selection_frame.place(x=77, y=320)
+        # self.eng_voice_selection = Entry(self.eng_voice_selection_frame, width=3, bd=2, font=15, justify=CENTER)
+        # self.eng_voice_selection.pack(side=LEFT, padx=2, pady=2)
+        self.eng_voice_selection_combo = ttk.Combobox(self.eng_voice_selection_frame,
+                                                      values=[
+                                                          "Голос 1",
+                                                          "Голос 2",
+                                                          "Голос 3",
+                                                          "Голос 4"
+                                                      ])
+        self.eng_voice_selection_combo.pack(side=LEFT, padx=2, pady=2)
+
+        # Скорость воспроизведения в англ тексте
+        self.eng_playback_speed_frame = Frame(self.root, relief='raised')
+        self.eng_playback_speed_frame = LabelFrame(text="Скорость\nвоспроизведения")
+        self.eng_playback_speed_frame.place(x=230, y=320)
+        self.eng_playback_speed = Entry(self.eng_playback_speed_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.eng_playback_speed.pack(side=LEFT, padx=2, pady=2)
+
+        # кнопка воспроизвести в англ тексте
+        self.eng_playback = Button(self.root, text="Послушать\nчто\nполучилось")
+        self.eng_playback.place(x=340, y=320)
+
 
 
     def open_file(self):  # Открыть файл
