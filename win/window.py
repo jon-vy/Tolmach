@@ -1,7 +1,7 @@
 import os
 from tkinter import *
 from tkinter import filedialog as fd, ttk
-
+a = 1
 
 class Window:
     def __init__(self):
@@ -14,9 +14,9 @@ class Window:
         w = w - 450  # смещение от середины
         h = h - 350
         self.root.geometry(f'900x600+{w}+{h}')
-        self.root.minsize(900, 600)  # Минимальный размер окна
+        self.root.resizable(width=False, height=False)  # Минимальный размер окна
 
-        photo = PhotoImage(file='1.png')  # Изменение иконки в левом верхнем
+        photo = PhotoImage(file='img/1.png')  # Изменение иконки в левом верхнем
         self.root.iconphoto(False, photo)  # углу окна
 
         # Меню
@@ -25,6 +25,14 @@ class Window:
         self.mainmenu.add_command(label='Настройки')
         self.mainmenu.add_command(label='Справка')
         self.mainmenu.add_command(label='Купить')
+
+
+
+
+
+
+
+
 
         # Загрузить из файла
         self.frame_2 = Frame(self.root, relief='raised')
@@ -43,6 +51,12 @@ class Window:
         self.btn_2 = Button(self.frame_2, text="Выбрать файл", command=lambda: self.open_file())
         self.btn_2.pack(side=RIGHT, padx=5)
 
+
+
+
+
+
+
         # eng txt
         self.frame_eng = Frame(self.root, relief='raised')
         self.frame_eng = LabelFrame(text="eng txt")  # Рамка фрейма
@@ -57,6 +71,15 @@ class Window:
         self.ru_txt = Text(self.frame_ru, bg="white", width=50, height=15)
         self.ru_txt.pack(fill=X)
 
+
+
+
+
+
+
+
+
+
         # Интервал между словами в англ тексте
         self.eng_word_spacing_frame = Frame(self.root, relief='raised')
         self.eng_word_spacing_frame = LabelFrame(text="Интервал\n между\n словами")
@@ -69,7 +92,7 @@ class Window:
         # Выбор голоса англ текст
         self.eng_voice_selection_frame = Frame(self.root, relief='raised')
         self.eng_voice_selection_frame = LabelFrame(text="Выбор\nголоса")
-        self.eng_voice_selection_frame.place(x=77, y=320)
+        self.eng_voice_selection_frame.place(x=95, y=320)
         # self.eng_voice_selection = Entry(self.eng_voice_selection_frame, width=3, bd=2, font=15, justify=CENTER)
         # self.eng_voice_selection.pack(side=LEFT, padx=2, pady=2)
         self.eng_voice_selection_combo = ttk.Combobox(self.eng_voice_selection_frame,
@@ -84,13 +107,76 @@ class Window:
         # Скорость воспроизведения в англ тексте
         self.eng_playback_speed_frame = Frame(self.root, relief='raised')
         self.eng_playback_speed_frame = LabelFrame(text="Скорость\nвоспроизведения")
-        self.eng_playback_speed_frame.place(x=230, y=320)
+        self.eng_playback_speed_frame.place(x=135, y=395)
         self.eng_playback_speed = Entry(self.eng_playback_speed_frame, width=3, bd=2, font=15, justify=CENTER)
         self.eng_playback_speed.pack(side=LEFT, padx=2, pady=2)
 
         # кнопка воспроизвести в англ тексте
-        self.eng_playback = Button(self.root, text="Послушать\nчто\nполучилось")
-        self.eng_playback.place(x=340, y=320)
+        self.imagetest = PhotoImage(file="img/play1.png")
+        self.eng_play = Button(self.root, cursor="hand2", text="Послушать\nчто\nполучилось", borderwidth=5, relief=GROOVE, image=self.imagetest, compound="right")
+        self.eng_play.place(x=2, y=400)
+
+
+
+
+
+
+
+
+
+        # Интервал между словами в ru тексте
+        self.eng_word_spacing_frame = Frame(self.root, relief='raised')
+        self.eng_word_spacing_frame = LabelFrame(text="Интервал\n между\n словами")
+        self.eng_word_spacing_frame.place(x=824, y=320)
+        self.eng_word_spacing = Entry(self.eng_word_spacing_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.eng_word_spacing.pack(side=LEFT, padx=2, pady=2)
+        self.eng_word_spacing_label = Label(self.eng_word_spacing_frame, text="Сек.", justify=LEFT)
+        self.eng_word_spacing_label.pack(side=LEFT, padx=2, pady=2)
+
+        # Выбор голоса ru текст
+        self.eng_voice_selection_frame = Frame(self.root, relief='raised')
+        self.eng_voice_selection_frame = LabelFrame(text="Выбор\nголоса")
+        self.eng_voice_selection_frame.place(x=655, y=320)
+        # self.eng_voice_selection = Entry(self.eng_voice_selection_frame, width=3, bd=2, font=15, justify=CENTER)
+        # self.eng_voice_selection.pack(side=LEFT, padx=2, pady=2)
+        self.eng_voice_selection_combo = ttk.Combobox(self.eng_voice_selection_frame,
+                                                      values=[
+                                                          "Голос 1",
+                                                          "Голос 2",
+                                                          "Голос 3",
+                                                          "Голос 4"
+                                                      ])
+        self.eng_voice_selection_combo.pack(side=LEFT, padx=2, pady=2)
+
+        # Скорость воспроизведения в ru тексте
+        self.eng_playback_speed_frame = Frame(self.root, relief='raised')
+        self.eng_playback_speed_frame = LabelFrame(text="Скорость\nвоспроизведения")
+        self.eng_playback_speed_frame.place(x=655, y=395)
+        self.eng_playback_speed = Entry(self.eng_playback_speed_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.eng_playback_speed.pack(side=LEFT, padx=2, pady=2)
+
+        # кнопка воспроизвести в ru тексте
+        self.image_play_ru = PhotoImage(file="img/play1.png")
+        self.eng_play = Button(self.root, cursor="hand2", text="Послушать\nчто\nполучилось", borderwidth=5,
+                               relief=GROOVE, image=self.image_play_ru, compound="right")
+        self.eng_play.place(x=767, y=400)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
