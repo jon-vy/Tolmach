@@ -2,8 +2,22 @@
 import os
 from tkinter import *
 from tkinter import filedialog as fd, ttk
+
+from tkhtmlview import HTMLLabel
+from tkinterhtml import HtmlFrame
 # </editor-fold>
 
+# <editor-fold desc="HTML">
+HTML = """
+<p style="text-align: center;">
+    <b>
+        <a  href="https://www.python.org" style="color:#%02x%02x%02x; font-size:30px">
+            www.python.org
+        </a>
+        11111
+    </b>
+</p>"""
+# </editor-fold>
 
 class Window:
     def __init__(self):
@@ -36,7 +50,7 @@ class Window:
         self.frame_2.pack(side=TOP, fill="both", ipady=5, padx=10)
         # </editor-fold>
         # <editor-fold desc="Поле выбора файла">
-        self.path_file = Text(self.frame_2, height=1.1, bg="white", font=("Calibri", 12));
+        self.path_file = Text(self.frame_2, height=1.1, bg="white", font=("Calibri", 12))
         self.path_file.pack(side=LEFT, padx=10, expand=1, fill=X)
         self.path_file.insert(0.0, os.getcwd())  # Вставляет путь до родительской папки
         # self.path_file.insert(0.0, 'C:\\')
@@ -143,6 +157,44 @@ class Window:
                               compound="right")
         self.ru_play.place(x=767, y=400)
         # </editor-fold>
+        # <editor-fold desc="Интервал между ru и eng предложениями">
+        self.ru_eng_spacing_frame = Frame(self.root, relief='raised')
+        self.ru_eng_spacing_frame = LabelFrame(text="Интервал между\n предложениями ru - eng")
+        self.ru_eng_spacing_frame.place(x=375, y=320)
+        self.ru_eng_spacing = Entry(self.ru_eng_spacing_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.ru_eng_spacing.pack(side=LEFT, padx=2, pady=2)
+        self.ru_eng_spacing_label = Label(self.ru_eng_spacing_frame, text="Сек.", justify=LEFT)
+        self.ru_eng_spacing_label.pack(side=LEFT, padx=2, pady=2)
+        # </editor-fold>
+        # <editor-fold desc="Прослушать всё целиком">
+        self.image_play = PhotoImage(file="img/play1.png")
+        self.play = Button(self.root,
+                              cursor="hand2",
+                              text="Послушать\nчто\nполучилось",
+                              borderwidth=5,
+                              relief=GROOVE,
+                              image=self.image_play,
+                              compound="right")
+        self.play.place(x=385, y=400)
+        # </editor-fold>
+
+
+        # <editor-fold desc="Рекламма">
+        self.adv_frame = Frame(self.root, relief='raised')
+        self.adv_frame = LabelFrame(text="Рекламма")  # Рамка фрейма
+        self.adv_frame.place(x=2, y=460)
+        self.adv = Text(self.adv_frame, bg="white", width=111, height=6)
+        self.adv.pack(fill=X)
+
+        # self.html_label = HTMLLabel(self.root, html=HTML % (0, 0, 0), width=50)
+        # self.html_label.pack(fill="both", expand=True)
+        # self.html_label.fit_height()
+
+
+        # self.adv = Text(self.adv_frame, width=98, height=5, bd=2, font=15)
+        # self.adv.pack(side=LEFT, padx=2, pady=2)
+        # </editor-fold>
+
 
     '''Функции'''
 
