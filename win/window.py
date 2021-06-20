@@ -14,7 +14,6 @@ HTML = """
         <a  href="https://www.python.org" style="color:#%02x%02x%02x; font-size:30px">
             www.python.org
         </a>
-        11111
     </b>
 </p>"""
 # </editor-fold>
@@ -179,22 +178,12 @@ class Window:
         # </editor-fold>
 
 
-        # <editor-fold desc="Рекламма">
+        # <editor-fold desc="Реклама">
         self.adv_frame = Frame(self.root, relief='raised')
         self.adv_frame = LabelFrame(text="Рекламма")  # Рамка фрейма
         self.adv_frame.place(x=2, y=460)
-
         self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=6)
-        # self.adv = Text(self.adv_frame, bg="white", width=111, height=6)
         self.adv.pack()
-
-        # self.html_label = HTMLLabel(self.root, html=HTML % (0, 0, 0), width=50)
-        # self.html_label.pack(fill="both", expand=True)
-        # self.html_label.fit_height()
-
-
-        # self.adv = Text(self.adv_frame, width=98, height=5, bd=2, font=15)
-        # self.adv.pack(side=LEFT, padx=2, pady=2)
         # </editor-fold>
 
 
