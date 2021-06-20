@@ -183,8 +183,10 @@ class Window:
         self.adv_frame = Frame(self.root, relief='raised')
         self.adv_frame = LabelFrame(text="Рекламма")  # Рамка фрейма
         self.adv_frame.place(x=2, y=460)
-        self.adv = Text(self.adv_frame, bg="white", width=111, height=6)
-        self.adv.pack(fill=X)
+
+        self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=6)
+        # self.adv = Text(self.adv_frame, bg="white", width=111, height=6)
+        self.adv.pack()
 
         # self.html_label = HTMLLabel(self.root, html=HTML % (0, 0, 0), width=50)
         # self.html_label.pack(fill="both", expand=True)
