@@ -1,22 +1,10 @@
-# <editor-fold desc="Импорты пакетов">
 import os
 from tkinter import *
 from tkinter import filedialog as fd, ttk
-
 from tkhtmlview import HTMLLabel
-from tkinterhtml import HtmlFrame
-# </editor-fold>
+import adv
 
-# <editor-fold desc="HTML">
-HTML = """
-<p style="text-align: center;">
-    <b>
-        <a  href="https://www.python.org" style="color:#%02x%02x%02x; font-size:30px">
-            www.python.org
-        </a>
-    </b>
-</p>"""
-# </editor-fold>
+HTML = adv.adv().text
 
 class Window:
     def __init__(self):
@@ -176,8 +164,6 @@ class Window:
                               compound="right")
         self.play.place(x=385, y=400)
         # </editor-fold>
-
-
         # <editor-fold desc="Реклама">
         self.adv_frame = Frame(self.root, relief='raised')
         self.adv_frame = LabelFrame(text="Рекламма")  # Рамка фрейма
@@ -185,7 +171,6 @@ class Window:
         self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=6)
         self.adv.pack()
         # </editor-fold>
-
 
     '''Функции'''
 
