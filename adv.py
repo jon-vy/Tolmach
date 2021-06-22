@@ -6,6 +6,6 @@ def adv():
 
 if __name__ == "__main__":
     ad = adv().text
-
     print(type(ad))
     print(ad)
+
