@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import filedialog as fd, ttk
 from tkhtmlview import HTMLLabel
 import adv
+import speek
 
 HTML = adv.adv().text
 
@@ -101,7 +102,10 @@ class Window:
                                borderwidth=5,
                                relief=GROOVE,
                                image=self.imagetest,
-                               compound="right")
+                               compound="right",
+                               command=lambda: speek.sp(self.eng_txt.get("1.0", 'end-1c'),
+                                                        int(self.eng_playback_speed.get())))
+                               #command=lambda: self.s())
         self.eng_play.place(x=2, y=400)
         # </editor-fold>
         # <editor-fold desc="Интервал между словами в ru тексте">
@@ -127,11 +131,11 @@ class Window:
         self.eng_voice_selection_combo.pack(side=LEFT, padx=2, pady=2)
         # </editor-fold>
         # <editor-fold desc="Скорость воспроизведения в ru тексте">
-        self.eng_playback_speed_frame = Frame(self.root, relief='raised')
-        self.eng_playback_speed_frame = LabelFrame(text="Скорость\nвоспроизведения")
-        self.eng_playback_speed_frame.place(x=655, y=395)
-        self.eng_playback_speed = Entry(self.eng_playback_speed_frame, width=3, bd=2, font=15, justify=CENTER)
-        self.eng_playback_speed.pack(side=LEFT, padx=2, pady=2)
+        self.ru_playback_speed_frame = Frame(self.root, relief='raised')
+        self.ru_playback_speed_frame = LabelFrame(text="Скорость\nвоспроизведения")
+        self.ru_playback_speed_frame.place(x=655, y=395)
+        self.ru_playback_speed = Entry(self.ru_playback_speed_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.ru_playback_speed.pack(side=LEFT, padx=2, pady=2)
         # </editor-fold>
         # <editor-fold desc="кнопка воспроизвести в ru тексте">
         self.image_play_ru = PhotoImage(file="img/play1.png")
@@ -141,7 +145,9 @@ class Window:
                               borderwidth=5,
                                relief=GROOVE,
                               image=self.image_play_ru,
-                              compound="right")
+                              compound="right",
+                              command=lambda: speek.sp(self.ru_txt.get("1.0", 'end-1c'),
+                                                       int(self.ru_playback_speed.get())))
         self.ru_play.place(x=767, y=400)
         # </editor-fold>
         # <editor-fold desc="Интервал между ru и eng предложениями">
@@ -188,6 +194,8 @@ class Window:
     def run(self):
         self.root.mainloop()
     # </editor-fold>
+    def s(self):
+        print(self.eng_playback_speed.get())
 
 if __name__ == "__main__":
     w = Window()
