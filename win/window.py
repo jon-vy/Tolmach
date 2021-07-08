@@ -4,6 +4,7 @@ from tkinter import filedialog as fd, ttk
 from tkhtmlview import HTMLLabel
 import adv
 import speek
+import date
 
 HTML = adv.adv().text
 
@@ -192,6 +193,7 @@ class Window:
     # </editor-fold>
     # <editor-fold desc="Функция запуска окна">
     def run(self):
+        self.root.protocol("WM_DELETE_WINDOW", date.save())
         self.root.mainloop()
     # </editor-fold>
     def s(self):
