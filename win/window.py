@@ -2,6 +2,7 @@ import os
 from tkinter import *
 from tkinter import filedialog as fd, ttk
 from tkhtmlview import HTMLLabel
+import sqlite3 as sq
 import adv
 import speek
 import date
@@ -57,6 +58,7 @@ class Window:
         self.frame_eng = LabelFrame(text="eng txt")  # Рамка фрейма
         self.frame_eng.pack(side=LEFT, expand=1, fill=X, anchor=N)
         self.eng_txt = Text(self.frame_eng, bg="white", width=50, height=15)
+        self.eng_txt.insert(0.0, date.select()[0][1])
         self.eng_txt.pack(fill=X)
         # </editor-fold>
         # <editor-fold desc="ru txt">
@@ -64,6 +66,7 @@ class Window:
         self.frame_ru = LabelFrame(text="ru txt")  # Рамка фрейма
         self.frame_ru.pack(side=LEFT, expand=1, fill=X, anchor=N)
         self.ru_txt = Text(self.frame_ru, bg="white", width=50, height=15)
+        self.ru_txt.insert(0.0, date.select()[0][2])
         self.ru_txt.pack(fill=X)
         # </editor-fold>
         # <editor-fold desc="Интервал между словами в англ тексте">
@@ -93,6 +96,7 @@ class Window:
         self.eng_playback_speed_frame = LabelFrame(text="Скорость\nвоспроизведения")
         self.eng_playback_speed_frame.place(x=135, y=395)
         self.eng_playback_speed = Entry(self.eng_playback_speed_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.eng_playback_speed.insert(0, date.select()[0][3])
         self.eng_playback_speed.pack(side=LEFT, padx=2, pady=2)
         # </editor-fold>
         # <editor-fold desc="кнопка воспроизвести в англ тексте">
@@ -105,7 +109,8 @@ class Window:
                                image=self.imagetest,
                                compound="right",
                                command=lambda: speek.sp(self.eng_txt.get("1.0", 'end-1c'),
-                                                        int(self.eng_playback_speed.get())))
+                                                        int(self.eng_playback_speed.get()),
+                                                        'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0'))
                                #command=lambda: self.s())
         self.eng_play.place(x=2, y=400)
         # </editor-fold>
@@ -136,6 +141,7 @@ class Window:
         self.ru_playback_speed_frame = LabelFrame(text="Скорость\nвоспроизведения")
         self.ru_playback_speed_frame.place(x=655, y=395)
         self.ru_playback_speed = Entry(self.ru_playback_speed_frame, width=3, bd=2, font=15, justify=CENTER)
+        self.ru_playback_speed.insert(0, date.select()[0][4])
         self.ru_playback_speed.pack(side=LEFT, padx=2, pady=2)
         # </editor-fold>
         # <editor-fold desc="кнопка воспроизвести в ru тексте">
@@ -148,7 +154,8 @@ class Window:
                               image=self.image_play_ru,
                               compound="right",
                               command=lambda: speek.sp(self.ru_txt.get("1.0", 'end-1c'),
-                                                       int(self.ru_playback_speed.get())))
+                                                       int(self.ru_playback_speed.get()),
+                                                       'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_RU-RU_IRINA_11.0'))
         self.ru_play.place(x=767, y=400)
         # </editor-fold>
         # <editor-fold desc="Интервал между ru и eng предложениями">
@@ -158,6 +165,7 @@ class Window:
         self.ru_eng_spacing = Entry(self.ru_eng_spacing_frame, width=3, bd=2, font=15, justify=CENTER)
         self.ru_eng_spacing.pack(side=LEFT, padx=2, pady=2)
         self.ru_eng_spacing_label = Label(self.ru_eng_spacing_frame, text="Сек.", justify=LEFT)
+        self.ru_eng_spacing.insert(0, date.select()[0][5])
         self.ru_eng_spacing_label.pack(side=LEFT, padx=2, pady=2)
         # </editor-fold>
         # <editor-fold desc="Прослушать всё целиком">
@@ -191,13 +199,27 @@ class Window:
     def transl(self):  # Переводчик
         pass
     # </editor-fold>
+    # <editor-fold desc="Сохранение данных при закрытии окна">
+    def save(self):
+        self.eng_t = self.eng_txt.get("1.0", 'end-1c')
+        self.ru_t = self.ru_txt.get("1.0", 'end-1c')
+        self.eng_playback_sp = self.eng_playback_speed.get()
+        self.ru_playback_sp = self.ru_playback_speed.get()
+        self.ru_eng_spac = self.ru_eng_spacing.get()
+        with sq.connect("db.db") as con:
+            self.cur = con.cursor()
+            self.cur.execute(f"UPDATE date SET txt_eng = '{self.eng_t}'  WHERE id = 1")
+            self.cur.execute(f"UPDATE date SET txt_ru = '{self.ru_t}'  WHERE id = 1")
+            self.cur.execute(f"UPDATE date SET eng_playback_speed = '{self.eng_playback_sp}'  WHERE id = 1")
+            self.cur.execute(f"UPDATE date SET ru_playback_speed = '{self.ru_playback_sp}'  WHERE id = 1")
+            self.cur.execute(f"UPDATE date SET ru_eng_spacing = '{self.ru_eng_spac}'  WHERE id = 1")
+            self.root.destroy()
+    # </editor-fold>
     # <editor-fold desc="Функция запуска окна">
     def run(self):
-        self.root.protocol("WM_DELETE_WINDOW", date.save())
+        self.root.protocol("WM_DELETE_WINDOW", self.save)
         self.root.mainloop()
     # </editor-fold>
-    def s(self):
-        print(self.eng_playback_speed.get())
 
 if __name__ == "__main__":
     w = Window()
