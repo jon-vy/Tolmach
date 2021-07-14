@@ -95,17 +95,27 @@ class Window:
                                                        'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_RU-RU_IRINA_11.0'))
         self.ru_play.place(x=767, y=265)
         # </editor-fold>
-        # <editor-fold desc="Прослушать всё целиком">
-        self.image_play = PhotoImage(file="img/play1.png")
-        self.play = Button(self.root,
-                              cursor="hand2",
-                              text="Фразу в список  ",
-                              borderwidth=5,
-                              relief=GROOVE,
-                              image=self.image_play,
-                              compound="right")
-        self.play.place(x=375, y=265)
-        # </editor-fold>
+        # <editor-fold desc="кнопка записать mp3">
+        self.write_mp3 = Button(self.root,
+                               cursor="hand2",
+                               text="записать mp3",
+                               borderwidth=5,
+                               relief=GROOVE,
+                               compound="right",
+                               command=lambda: (
+                                   speek.wr(self.ru_txt.get("1.0", 'end-1c'),
+                                            int(self.ru_playback_speed.get()),
+                                            speek.ru,
+                                            'ru'),
+                                   speek.wr(self.eng_txt.get("1.0", 'end-1c'),
+                                            int(self.eng_playback_speed.get()),
+                                            speek.eng,
+                                            'eng')
+                               )
+                                )
+        # command=lambda: self.s())
+        self.write_mp3.place(x=410, y=265)
+        # </editor-fold>?
         # <editor-fold desc="Сформировать урок">
         self.play = Button(self.root,
                            cursor="hand2",
@@ -113,13 +123,13 @@ class Window:
                            borderwidth=5,
                            relief=GROOVE,
                            compound="right")
-        self.play.place(x=385, y=330)
+        self.play.place(x=385, y=298)
         # </editor-fold>
         # <editor-fold desc="Реклама">
         self.adv_frame = Frame(self.root, relief='raised')
         self.adv_frame = LabelFrame(text="Рекламма")  # Рамка фрейма
-        self.adv_frame.place(x=2, y=360)
-        self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=12)
+        self.adv_frame.place(x=2, y=330)
+        self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=14)
         self.adv.pack()
         # </editor-fold>
 
