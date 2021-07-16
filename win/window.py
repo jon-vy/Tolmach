@@ -7,7 +7,8 @@ import adv
 import speek
 import date
 
-HTML = adv.adv().text
+HTML = adv.adv()
+# HTML = '<p style="text-align: center;"><b>Сервер не доступен</b></p>'
 
 class Window:
     def __init__(self):
@@ -87,7 +88,7 @@ class Window:
                               cursor="hand2",
                               text="Послушать\nчто\nполучилось",
                               borderwidth=5,
-                               relief=GROOVE,
+                              relief=GROOVE,
                               image=self.image_play_ru,
                               compound="right",
                               command=lambda: speek.sp(self.ru_txt.get("1.0", 'end-1c'),
@@ -105,11 +106,11 @@ class Window:
                                command=lambda: (
                                    speek.wr(self.ru_txt.get("1.0", 'end-1c'),
                                             int(self.ru_playback_speed.get()),
-                                            speek.ru,
+                                            speek.ru_voice_id,
                                             'ru'),
                                    speek.wr(self.eng_txt.get("1.0", 'end-1c'),
                                             int(self.eng_playback_speed.get()),
-                                            speek.eng,
+                                            speek.eng_voice_id,
                                             'eng')
                                )
                                 )
@@ -127,9 +128,10 @@ class Window:
         # </editor-fold>
         # <editor-fold desc="Реклама">
         self.adv_frame = Frame(self.root, relief='raised')
-        self.adv_frame = LabelFrame(text="Рекламма")  # Рамка фрейма
+        self.adv_frame = LabelFrame(text="Реклама")  # Рамка фрейма
         self.adv_frame.place(x=2, y=330)
-        self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=14)
+        self.adv = HTMLLabel(self.adv_frame, html=HTML, width=111, height=14)
+        # self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=14)
         self.adv.pack()
         # </editor-fold>
 
