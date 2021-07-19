@@ -111,21 +111,13 @@ class Window:
                                    speek.wr(self.eng_txt.get("1.0", 'end-1c'),
                                             int(self.eng_playback_speed.get()),
                                             speek.eng_voice_id,
-                                            'eng')
+                                            'eng'),
+                                   speek.concat(self.eng_txt.get("1.0", 'end-1c'))
                                )
                                 )
         # command=lambda: self.s())
         self.write_mp3.place(x=410, y=265)
         # </editor-fold>?
-        # <editor-fold desc="Сформировать урок">
-        self.play = Button(self.root,
-                           cursor="hand2",
-                           text="Сформировать урок",
-                           borderwidth=5,
-                           relief=GROOVE,
-                           compound="right")
-        self.play.place(x=385, y=298)
-        # </editor-fold>
         # <editor-fold desc="Реклама">
         self.adv_frame = Frame(self.root, relief='raised')
         self.adv_frame = LabelFrame(text="Реклама")  # Рамка фрейма
