@@ -3,11 +3,10 @@ from tkinter import *
 from tkinter import filedialog as fd, ttk
 from tkhtmlview import HTMLLabel
 import sqlite3 as sq
-import adv
+
 import speek
 import date
 
-HTML = adv.adv()
 # HTML = '<p style="text-align: center;"><b>Сервер не доступен</b></p>'
 
 class Window:
@@ -21,19 +20,12 @@ class Window:
         h = h // 2
         w = w - 450  # смещение от середины
         h = h - 350
-        self.root.geometry(f'900x600+{w}+{h}')
+        self.root.geometry(f'900x330+{w}+{h}')
         self.root.resizable(width=False, height=False)  # Минимальный размер окна
         # </editor-fold>
         # <editor-fold desc="Изменение иконки в левом верхнем">
         photo = PhotoImage(file='img/1.png')  # Изменение иконки в левом верхнем
         self.root.iconphoto(False, photo)  # углу окна
-        # </editor-fold>
-        # <editor-fold desc="Меню">
-        self.mainmenu = Menu(self.root)
-        self.root.config(menu=self.mainmenu)
-        self.mainmenu.add_command(label='Настройки')
-        self.mainmenu.add_command(label='Справка')
-        self.mainmenu.add_command(label='Купить')
         # </editor-fold>
         # <editor-fold desc="eng txt">
         self.frame_eng = Frame(self.root, relief='raised')
@@ -96,10 +88,46 @@ class Window:
                                                        'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_RU-RU_IRINA_11.0'))
         self.ru_play.place(x=767, y=265)
         # </editor-fold>
-        # <editor-fold desc="кнопка записать mp3">
+        # <editor-fold desc="кнопка записать eng в mp3">
+        self.write_mp3 = Button(self.root,
+                                cursor="hand2",
+                                text="записать\neng в mp3",
+                                borderwidth=5,
+                                relief=GROOVE,
+                                compound="right",
+                                command=lambda: (
+                                    speek.wr(
+                                        self.eng_txt.get("1.0", 'end-1c'),
+                                        int(self.eng_playback_speed.get()),
+                                        speek.eng_voice_id,
+                                        f"eng {self.eng_txt.get('1.0', 'end-1c')}")
+                                )
+                                )
+        # command=lambda: self.s())
+        self.write_mp3.place(x=250, y=265)
+        # </editor-fold>?
+        # <editor-fold desc="кнопка записать ru в mp3">
+        self.write_mp3 = Button(self.root,
+                                cursor="hand2",
+                                text="записать\nru в mp3",
+                                borderwidth=5,
+                                relief=GROOVE,
+                                compound="right",
+                                command=lambda: (
+                                    speek.wr(
+                                        self.ru_txt.get("1.0", 'end-1c'),
+                                        int(self.ru_playback_speed.get()),
+                                        speek.ru_voice_id,
+                                        f"ru {self.ru_txt.get('1.0', 'end-1c')}")
+                                )
+                                )
+        # command=lambda: self.s())
+        self.write_mp3.place(x=585, y=265)
+        # </editor-fold>?
+        # <editor-fold desc="кнопка записать всё в mp3">
         self.write_mp3 = Button(self.root,
                                cursor="hand2",
-                               text="записать mp3",
+                               text="записать\nвсё в mp3",
                                borderwidth=5,
                                relief=GROOVE,
                                compound="right",
@@ -119,12 +147,14 @@ class Window:
         self.write_mp3.place(x=410, y=265)
         # </editor-fold>?
         # <editor-fold desc="Реклама">
-        self.adv_frame = Frame(self.root, relief='raised')
-        self.adv_frame = LabelFrame(text="Реклама")  # Рамка фрейма
-        self.adv_frame.place(x=2, y=330)
-        self.adv = HTMLLabel(self.adv_frame, html=HTML, width=111, height=14)
-        # self.adv = HTMLLabel(self.adv_frame, html=HTML % (0, 0, 0), width=111, height=14)
-        self.adv.pack()
+        # self.root.geometry(f'900x580+{w}+{h}')  # размер всего окна
+        # import adv
+        # HTML = adv.adv()
+        # self.adv_frame = Frame(self.root, relief='raised')
+        # self.adv_frame = LabelFrame(text="Реклама")  # Рамка фрейма
+        # self.adv_frame.place(x=2, y=330)
+        # self.adv = HTMLLabel(self.adv_frame, html=HTML, width=111, height=14)
+        # self.adv.pack()
         # </editor-fold>
 
     '''Функции'''
