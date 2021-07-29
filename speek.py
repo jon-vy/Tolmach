@@ -32,16 +32,23 @@ def wr(txt, rate, voice_id, lang_file):
 def pause_ru_eng():
     engine.setProperty('rate', 50)
     engine.setProperty('volume', 0)
-    engine.save_to_file('Пауза между фразами', f'audio/pause.mp3')
+    engine.save_to_file('Пауза между фразами Пауза между фразами', f'audio/pause.mp3')
     engine.runAndWait()
 # </editor-fold>
 # <editor-fold desc="Объеденение mp3 файлов">
 def concat(file_name):
     sound1 = AudioSegment.from_file("audio/ru.mp3", format="wav")
     sound2 = AudioSegment.from_file("audio/eng.mp3", format="wav")
-    pause = AudioSegment.from_file("audio/pause.mp3", format="wav")
+    pause = AudioSegment.from_file("audio/pause_7_sek.mp3", format="wav")
     sound3 = sound1+pause+sound2
     sound3.export(f"audio/lesson/{file_name}.mp3", format="mp3")
+# </editor-fold>
+# <editor-fold desc="Добавить паузу в конец mp3">
+def add_pause(file_name):
+    sound1 = AudioSegment.from_file(f"audio/{file_name}.mp3", format="wav")
+    pause = AudioSegment.from_file("audio/pause_12_sek.mp3", format="wav")
+    sound3 = sound1 + pause
+    sound3.export(f"audio/{file_name}.mp3", format="mp3")
 # </editor-fold>
 
 

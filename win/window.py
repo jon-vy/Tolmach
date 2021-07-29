@@ -100,7 +100,8 @@ class Window:
                                         self.eng_txt.get("1.0", 'end-1c'),
                                         int(self.eng_playback_speed.get()),
                                         speek.eng_voice_id,
-                                        f"eng {self.eng_txt.get('1.0', 'end-1c')}")
+                                        f"eng {self.eng_txt.get('1.0', 'end-1c')}"),
+                                    speek.add_pause(f"eng {self.eng_txt.get('1.0', 'end-1c')}")
                                 )
                                 )
         # command=lambda: self.s())
